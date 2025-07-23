@@ -35,7 +35,7 @@ def scan_images():
     
     # Load YOLO model
     print("\n🔄 Loading YOLO model...")
-    model = YOLO('yolov11n.pt')  # Downloads automatically on first run
+    model = YOLO('yolo11n.pt')  # Downloads automatically on first run
     print("✅ YOLO model loaded successfully!")
     
     # Vehicle types we want to detect
