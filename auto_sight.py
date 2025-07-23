@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AutoSight: AI vision model that detects issues around the city streets
+AutoSight: An AI vision model that detects hazards and issues around the city streets
 """
 
 import cv2
@@ -8,9 +8,8 @@ import os
 from ultralytics import YOLO
 
 def scan_images():
-    """Scan images for common issues around the city"""
     
-    print("Starting Image Scan")
+    print("Starting Image Scan...")
     print("=" * 50)
     
     # Check if images folder exists
@@ -36,7 +35,7 @@ def scan_images():
     
     # Load YOLO model
     print("\n🔄 Loading YOLO model...")
-    model = YOLO('yolov8n.pt')  # Downloads automatically on first run
+    model = YOLO('yolov11n.pt')  # Downloads automatically on first run
     print("✅ YOLO model loaded successfully!")
     
     # Vehicle types we want to detect
