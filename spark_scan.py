@@ -39,7 +39,7 @@ def scan_images():
     print("✅ YOLO model loaded successfully!")
     
     # Fire hazards we want to detect
-    fire_hazards = ['Dry grass', 'Downed power line']
+    fire_hazards = ['dry grass', 'downed power line']
     
     total_hazards_found = 0
     
