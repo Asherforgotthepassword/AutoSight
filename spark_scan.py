@@ -40,8 +40,7 @@ def scan_images():
     
     # Fire hazards we want to detect
     fire_hazards = ['Dry grass', 'Downed power line']
-    
-    total_hazards_found = 0
+    images_with_hazards = 0
     
     # Process each image
     for i, image_file in enumerate(image_files, 1):
@@ -71,15 +70,13 @@ def scan_images():
             # Check if it's a hazard we want
             if class_name in fire_hazards:
                 hazards_found += 1
-                total_hazards_found += 1
                 hazard_detections.append((box, class_name, confidence))
                 print(f"   🔥 {hazards_found}. {class_name}: {confidence:.2f} confidence")
         
         if hazards_found == 0:
             print("   No fire hazards detected in this image")
-            continue
-        
-        print(f"   📊 Total fire hazards in this image: {hazards_found}")
+        else:
+            images_with_hazards += 1
         
         # Draw bounding boxes on the image
         for box, class_name, confidence in hazard_detections:
@@ -111,9 +108,9 @@ def scan_images():
     # Final summary
     print(f"\n{'='*60}")
     print(f"🎉 Detection Complete!")
-    print(f"📊 Total fire hazards found across all images: {total_hazards_found}")
+    print(f"📊 {images_with_hazards}/{len(image_files)} images have fire hazards")
     print(f"📁 Processed {len(image_files)} images")
-    print("📁 Check the 'detected_*.jpg' files to see the results")
+    print("📁 Check the SparkScan file to see the results")
     
     # Legend
     print(f"\n🌈 Color Legend:")
