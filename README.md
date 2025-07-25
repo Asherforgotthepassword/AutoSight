@@ -30,7 +30,7 @@ python3 spark_scan.py
 
 ## Fire Hazards Detected
 
-🌾🍂🔥 **Dry grass**
+🌾🍂🔥 **Dry grass**  
 🗼〰️🗼 **Downed Power Lines**
 
 ## Example Output
@@ -66,7 +66,7 @@ SparkScan/
 
 ## Real-World Applications
 
-🔥 **Early wildfire prevention** - Helps city officials identify flammable zones before fire season
-⚡ **Downed power line detection** - Can automatically flag hazardous lines after storms or earthquakes
-🚧 **Smart city infrastructure monitoring** - Integrates with CCTV or traffic camera networks to scan for fire hazards in real-time
+🔥 **Early wildfire prevention** - Helps city officials identify flammable zones before fire season  
+⚡ **Downed power line detection** - Can automatically flag hazardous lines after storms or earthquakes  
+🚧 **Smart city infrastructure monitoring** - Integrates with CCTV or traffic camera networks to scan for fire hazards in real-time  
 🧑‍🚒 **Decision support for firefighters** - Integrates with drones to quickly identify fire hazards, helping firefighters prioritize controlled burns and emergency access
