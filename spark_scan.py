@@ -39,7 +39,7 @@ def scan_images():
     print("✅ YOLO model loaded successfully!")
     
     # Fire hazards we want to detect
-    fire_hazards = ['dry grass', 'downed power line']
+    fire_hazards = ['Dry grass', 'Downed power line']
     
     total_hazards_found = 0
     
@@ -69,7 +69,7 @@ def scan_images():
             confidence = float(box.conf[0])
             
             # Check if it's a hazard we want
-            if class_name.lower() in fire_hazards:
+            if class_name in fire_hazards:
                 hazards_found += 1
                 total_hazards_found += 1
                 hazard_detections.append((box, class_name, confidence))
