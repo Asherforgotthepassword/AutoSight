@@ -6,7 +6,7 @@
 ```bash
 mkdir ~/yolo_demo 
 cd ~/yolo_demo
-git clone https://github.com/QMay17/sjsu_summer2025.git
+git clone https://github.com/Asherforgotthepassword/AutoSight.git
 cd sjsu_summer2025
 ```
 
