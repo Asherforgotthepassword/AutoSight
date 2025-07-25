@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-AutoSight: An AI vision model that detects hazards and issues around the city streets
+SparkScan: An AI vision model that detects urban fire hazards, specifically downed power lines and dry grass
 """
 
 import cv2
@@ -13,35 +13,35 @@ def scan_images():
     print("=" * 50)
     
     # Check if images folder exists
-    if not os.path.exists('images'):
-        print("❌ Error: 'images' folder not found!")
-        print("   Please create an 'images' folder and add some .jpg files")
+    if not os.path.exists('Testing_Images'):
+        print("❌ Error: 'Testing_Images' folder not found!")
+        print("   Please create a 'Testing_Images' folder and add some .jpg or .webp files")
         return
     
     # Find all image files in the images folder
-    image_extensions = ['.jpg', '.jpeg']
+    image_extensions = ['.jpg', '.webp']
     image_files = []
     
-    for file in os.listdir('images'):
+    for file in os.listdir('Testing_Images'):
         if any(file.lower().endswith(ext) for ext in image_extensions):
-            image_files.append(f'images/{file}')
+            image_files.append(f'Testing_Images/{file}')
     
     if not image_files:
-        print("❌ No image files found in the 'images' folder!")
-        print("   Please add some .jpg files to the 'images' folder")
+        print("❌ No image files found in the 'Testing_Images' folder!")
+        print("   Please add some .jpg or .webp files to the 'Testing_Images' folder")
         return
     
-    print(f"📁 Found {len(image_files)} image(s) in 'images' folder")
+    print(f"📁 Found {len(image_files)} image(s) in 'Testing_Images' folder")
     
     # Load YOLO model
     print("\n🔄 Loading YOLO model...")
-    model = YOLO('yolo11n.pt')  # Downloads automatically on first run
+    model = YOLO('best.pt')  # Downloads automatically on first run
     print("✅ YOLO model loaded successfully!")
     
-    # Vehicle types we want to detect
-    vehicle_types = ['car', 'truck', 'bus']
+    # Fire hazards we want to detect
+    fire_hazards = ['Dry grass', 'Downed power lines']
     
-    total_vehicles_found = 0
+    total_hazards_found = 0
     
     # Process each image
     for i, image_file in enumerate(image_files, 1):
@@ -59,40 +59,38 @@ def scan_images():
         results = model(image)
         result = results[0]
         
-        # Filter for vehicles only
-        vehicles_found = 0
-        vehicle_detections = []
+        # Filter for hazards only
+        hazards_found = 0
+        hazard_detections = []
         
         for box in result.boxes:
             class_id = int(box.cls[0])
             class_name = model.names[class_id]
             confidence = float(box.conf[0])
             
-            # Check if it's a vehicle type we want
-            if class_name.lower() in vehicle_types:
-                vehicles_found += 1
-                total_vehicles_found += 1
-                vehicle_detections.append((box, class_name, confidence))
-                print(f"   🚗 {vehicles_found}. {class_name}: {confidence:.2f} confidence")
+            # Check if it's a hazard we want
+            if class_name.lower() in fire_hazards:
+                hazards_found += 1
+                total_hazards_found += 1
+                hazard_detections.append((box, class_name, confidence))
+                print(f"   🔥 {hazards_found}. {class_name}: {confidence:.2f} confidence")
         
-        if vehicles_found == 0:
-            print("   No vehicles detected in this image")
+        if hazards_found == 0:
+            print("   No fire hazards detected in this image")
             continue
         
-        print(f"   📊 Total vehicles in this image: {vehicles_found}")
+        print(f"   📊 Total fire hazards in this image: {hazards_found}")
         
         # Draw bounding boxes on the image
-        for box, class_name, confidence in vehicle_detections:
+        for box, class_name, confidence in hazard_detections:
             # Get bounding box coordinates
             x1, y1, x2, y2 = map(int, box.xyxy[0])
             
-            # Choose color based on vehicle type
-            if class_name == 'car':
-                color = (0, 255, 0)  # Green for cars
-            elif class_name == 'truck':
-                color = (0, 0, 255)  # Red for trucks
+            # Choose color based on fire hazard
+            if class_name == 'Dry grass':
+                color = (0, 0, 255)  # Red for dry grass
             else:  # bus
-                color = (255, 0, 0)  # Blue for buses
+                color = (255, 0, 0)  # Blue for downed power lines
             
             # Draw rectangle
             cv2.rectangle(image, (x1, y1), (x2, y2), color, 2)
@@ -113,15 +111,14 @@ def scan_images():
     # Final summary
     print(f"\n{'='*60}")
     print(f"🎉 Detection Complete!")
-    print(f"📊 Total vehicles found across all images: {total_vehicles_found}")
+    print(f"📊 Total fire hazards found across all images: {total_hazards_found}")
     print(f"📁 Processed {len(image_files)} images")
     print("📁 Check the 'detected_*.jpg' files to see the results")
     
     # Legend
     print(f"\n🌈 Color Legend:")
-    print(f"   🟢 Green = Cars")
-    print(f"   🔴 Red = Trucks") 
-    print(f"   🔵 Blue = Buses")
+    print(f"   🔴 Red = Dry Grass") 
+    print(f"   🔵 Blue = Downed Power Lines")
 
 if __name__ == "__main__":
     scan_images()
