@@ -6,8 +6,8 @@
 ```bash
 mkdir ~/yolo_demo 
 cd ~/yolo_demo
-git clone https://github.com/Asherforgotthepassword/AutoSight.git
-cd sjsu_summer2025
+git clone https://github.com/Asherforgotthepassword/SparkScan.git
+cd SparkScan
 ```
 
 ### Step 2: Install and run
@@ -19,50 +19,54 @@ python3 spark_scan.py
 
 ```
 
-## What This Demo Does
+## What This Model Does
 
 ✅ **Loads YOLOv8** (state-of-the-art object detection)  
 ✅ **Detects dry grass and downed power lines** (focused detection)  
 ✅ **Shows confidence scores** for each fire hazard detected  
 ✅ **Draws bounding boxes** around detected fire hazards  
 ✅ **Saves results** as new image files with fire hazard detection  
-✅ **Counts total fire hazards** found in each image
+✅ **Counts total images** with fire hazards
 
 ## Fire Hazards Detected
 
-🚗 **Dry grass**
-🚚 **Downed Power Lines**
-
-Perfect for traffic monitoring, parking lot analysis, or autonomous vehicle projects!
+🌾🍂🔥 **Dry grass**
+🗼〰️🗼 **Downed Power Lines**
 
 ## Example Output
 
 When you run the detection, you'll see:
 ```
-🚗 Car Detection Results:
-  1. car: 0.85
-  2. car: 0.92
-  3. truck: 0.78
+============================================================
+🔍 Processing Image 4/9: testingDryAndHealthyGrass.webp
+----------------------------------------
 
-Saved car detection results as: cars_detected_cars1.jpg
-Total cars found: 3
+0: 448x640 4 Dry grasss, 1 Healthy grass, 37.9ms
+Speed: 1.1ms preprocess, 37.9ms inference, 0.4ms postprocess per image at shape (1, 3, 448, 640)
+   🔥 1. Dry grass: 0.49 confidence
+   🔥 2. Dry grass: 0.36 confidence
+   🔥 3. Dry grass: 0.35 confidence
+   🔥 4. Dry grass: 0.30 confidence
+   💾 Results saved as: detected_testingDryAndHealthyGrass.webp
+
+============================================================
 ```
 
 ## File Structure After Running
 
 ```
-sjsu_summer2025/
+SparkScan/
 ├── spark_scan.py           # Main detection script
-├── requirements.txt          # Dependencies
-├── README.md                 # Instructions
-├── Testing_Images/                   # Input images folder
+├── requirements.txt        # Dependencies
+├── README.md               # Instructions
+├── best.pt                 # Custom computer vision model
+├── Testing_Images/         # Input images folder
 ```
 
 
 ## Real-World Applications
 
-🚦 **Traffic monitoring** - Count cars at intersections  
-🅿️ **Parking lot management** - Monitor available spaces  
-🚨 **Security systems** - Vehicle access control  
-📊 **Smart city data** - Traffic flow analysis
-4. You have enough free disk space (~100MB)
+🔥 **Early wildfire prevention** - Helps city officials identify flammable zones before fire season
+⚡ **Downed power line detection** - Can automatically flag hazardous lines after storms or earthquakes
+🚧 **Smart city infrastructure monitoring** - Integrates with CCTV or traffic camera networks to scan for fire hazards in real-time
+🧑‍🚒 **Decision support for firefighters** - Integrates with drones to quickly identify fire hazards, helping firefighters prioritize controlled burns and emergency access
